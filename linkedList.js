@@ -37,7 +37,6 @@ class LinkedList {
         
         newNode.setNext(this.head);
         this.head = newNode;
-
         this.nodesCount++;
         
         return this;
@@ -60,6 +59,7 @@ class LinkedList {
             }
     
             nextNode.setNext(newNode);
+            this.nodesCount++;
         }
 
         return this;
@@ -86,11 +86,29 @@ class LinkedList {
         const result = [];
         let pos = 0;
 
-        for (let nextNode = this.head; nextNode.hasNext(); nextNode = nextNode.getNext()) {
+        for (let nextNode = this.head; nextNode !== null; nextNode = nextNode.getNext()) {
             result.push(cb(nextNode.getValue(), pos++));
         }
 
         return result;
+    }
+
+    indexOf(valueToFind) {
+
+        if (this.isEmpty()) return -1;
+
+        let index = 0;
+
+        for (let nextNode = this.head; nextNode !== null && nextNode.getValue() !== valueToFind; nextNode = nextNode.getNext()) {
+            index++;
+        }
+
+        return index >= this.size() ? -1 : index;
+    }
+
+    clear() {
+        this.head = null;
+        this.nodesCount = 0;
     }
 
     print() {
@@ -127,11 +145,5 @@ list.insertLast(14)
 console.log("List size: " + list.size());
 console.log(list.print());
 
-const asArray = list.map((value, pos) => {
-    return {
-        val: value * 2,
-        index: pos
-    }
-});
-
-console.log(asArray);
+console.log("Indexof[10] : " + list.indexOf(10));
+console.log("Indexof[15] : " + list.indexOf(15));
