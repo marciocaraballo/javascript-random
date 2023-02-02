@@ -73,6 +73,26 @@ class LinkedList {
         return this.nodesCount;
     }
 
+    map(cb) {
+
+        if (typeof cb !== "function") {
+            throw new Error("No callback function was provided to LinkedList.map");
+        }
+
+        if (this.isEmpty()) {
+            return [];
+        };
+
+        const result = [];
+        let pos = 0;
+
+        for (let nextNode = this.head; nextNode.hasNext(); nextNode = nextNode.getNext()) {
+            result.push(cb(nextNode.getValue(), pos++));
+        }
+
+        return result;
+    }
+
     print() {
 
         let result = '';
@@ -106,3 +126,12 @@ list.insertLast(14)
 
 console.log("List size: " + list.size());
 console.log(list.print());
+
+const asArray = list.map((value, pos) => {
+    return {
+        val: value * 2,
+        index: pos
+    }
+});
+
+console.log(asArray);
