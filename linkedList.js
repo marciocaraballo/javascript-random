@@ -29,9 +29,7 @@ class LinkedList {
 
     insertFirst(value) {
 
-        if (typeof value === undefined || typeof value === null) {
-            throw new Error("Value to insert must not be null or undefined");
-        }
+        if (value === undefined || value === null) throw new Error("Value to insert must not be null or undefined at LinkedList.insertFirst");
 
         const newNode = new Node(value);
         
@@ -44,9 +42,7 @@ class LinkedList {
 
     insertLast(value) {
 
-        if (typeof value === undefined || typeof value === null) {
-            throw new Error("Value to insert must not be null or undefined");
-        }
+        if (value === undefined || value === null) throw new Error("Value to insert must not be null or undefined at LinkedList.insert");
         
         if (this.isEmpty()) {
             this.insertFirst(value)
@@ -96,6 +92,8 @@ class LinkedList {
     indexOf(valueToFind) {
 
         if (this.isEmpty()) return -1;
+
+        if (valueToFind === undefined || valueToFind === null) throw new Error("Missing value to find in LinkedList.indexOf");
 
         let index = 0;
 
