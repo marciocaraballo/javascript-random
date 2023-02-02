@@ -4,6 +4,10 @@ const pairsSum = (numbers, sum) => {
     const pairResults = [];
     const substractions = {};
 
+    if (typeof sum !== 'number') {
+        throw new Error('sum value must be a number');
+    } 
+
     numbers.forEach(number => {
         if (typeof number === 'number' && number in substractions) {
             pairResults.push([number, substractions[number]]);
@@ -14,5 +18,3 @@ const pairsSum = (numbers, sum) => {
 
     return pairResults;
 }
-
-console.log(pairsSum([-15,1,7,9,4,12,22,40,2,5,20,25,10,29,45,30,0], 30));

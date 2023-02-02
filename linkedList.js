@@ -24,20 +24,45 @@ class Node {
 class LinkedList {
     constructor() {
         this.head = null;
+        this.nodesCount = 0;
     }
 
     insertFirst(value) {
+
+        if (typeof value === undefined || typeof value === null) {
+            throw new Error("Value to insert must not be null or undefined");
+        }
 
         const newNode = new Node(value);
         
         newNode.setNext(this.head);
         this.head = newNode;
+
+        this.nodesCount++;
         
         return this;
     }
 
-    insertAt() {
-        /** @TODO */
+    insertLast(value) {
+
+        if (typeof value === undefined || typeof value === null) {
+            throw new Error("Value to insert must not be null or undefined");
+        }
+        
+        if (this.isEmpty()) {
+            this.insertFirst(value)
+        } else {
+            const newNode = new Node(value);
+            let nextNode = this.head;
+
+            while(nextNode.hasNext()) {
+                nextNode = nextNode.getNext();
+            }
+    
+            nextNode.setNext(newNode);
+        }
+
+        return this;
     }
 
     isEmpty() {
@@ -45,20 +70,7 @@ class LinkedList {
     }
 
     size() {
-        let count = 0;
-
-        if (!this.isEmpty()) {
-            count = 1;
-
-            let nextNode = this.head;
-
-            while(nextNode.hasNext()) {
-                nextNode = nextNode.getNext();
-                count++;
-            }
-        }
-
-        return count;
+        return this.nodesCount;
     }
 
     print() {
@@ -74,13 +86,9 @@ class LinkedList {
             pos++;
 
             while(nextNode.hasNext()) {
-
                 nextNode = nextNode.getNext();
-    
-                result += `[${pos}|${nextNode.getValue()}] ->`;
-
+                result += `[${pos}|${nextNode.getValue()}] -> `;
                 pos++;
-
             }
         }
 
@@ -92,9 +100,9 @@ class LinkedList {
 
 const list = new LinkedList();
 
-list.insertFirst(2)
-    .insertFirst(1)
-    .insertFirst(3);
+list.insertLast(14)
+    .insertFirst(12)
+    .insertLast(10);
 
 console.log("List size: " + list.size());
 console.log(list.print());
