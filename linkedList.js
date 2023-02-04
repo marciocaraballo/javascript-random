@@ -61,6 +61,10 @@ class LinkedList {
         return this;
     }
 
+    getValueAt(pos) {
+        
+    }
+
     isEmpty() {
         return this.head === null;
     }
