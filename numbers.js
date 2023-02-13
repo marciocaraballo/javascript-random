@@ -18,3 +18,5 @@ const pairsSum = (numbers, sum) => {
 
     return pairResults;
 }
+
+  
